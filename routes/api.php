@@ -13,7 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/test', 'TestController@test')->name('test');
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['ability:Admin']], function()
+{
+    // Protected route
+    Route::get('/test2', 'TestController@test2')->name('test2');
 });
+
+Route::group(['middleware' => ['ability:Customer']], function()
+{
+    // Protected route
+    Route::get('/test', 'TestController@test')->name('test2');
+});
+
+// Authentication route
+Route::post('authenticate', 'AuthController@authenticate')->name('authenticate');
+
+// Route::get('/test', 'TestController@test')->name('test');
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

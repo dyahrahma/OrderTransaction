@@ -2,12 +2,22 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class User extends Authenticatable
+class User extends Model implements AuthenticatableContract,
+                                    AuthorizableContract,
+                                    CanResetPasswordContract
 {
-    use Notifiable;
+    use Authenticatable, CanResetPassword, EntrustUserTrait;
+    // use Notifiable;
+    use EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -27,8 +37,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function users_role()
-    {
-        return $this->belongsToMany('App\Role', 'user_roles');
-    }
+    // public function users_role()
+    // {
+    //     return $this->belongsToMany('App\Role', 'role_user');
+    // }
 }

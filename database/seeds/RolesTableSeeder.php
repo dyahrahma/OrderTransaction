@@ -16,11 +16,11 @@ class RolesTableSeeder extends Seeder
         	DB::table('roles')->insert([
 	            [
 	            'id' => 1,
-	            'role' => 'Admin'
+	            'name' => 'Admin'
 	            ],
 	            [
 	            'id' => 2,
-	            'role' => 'Customer'
+	            'name' => 'Customer'
 	            ]
 	        ]);
 	    }

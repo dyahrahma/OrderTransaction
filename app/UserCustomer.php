@@ -21,8 +21,8 @@ class UserCustomer extends Model
     public function newQuery() // override query builder result for eloquent
     {
         $query = parent::newQuery();
-        $query->join('user_roles', 'users.email', '=', 'user_roles.email')
-			->where('user_roles.role_id', '=', '2');
+        $query->join('role_user', 'users.id', '=', 'role_user.user_id')
+            ->where('role_user.role_id', '=', '2');
         return $query;
     }
 }
