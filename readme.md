@@ -143,7 +143,7 @@ Melakukan finalisasi order dengan memasukkan data diri yang dapat diambil dari d
 + Parameters
     + orderId - id order yg ingin diberi kupon
     + useRegisteredData (true/false) - true jika menggunakan data yang tersimpan, false jika ingin memasukkan data baru
-    + name, phone, email, address jika useRegisteredData == true
+    + name, phone, email, address jika useRegisteredData == false
 
 + Example Request
     `https://frozen-bastion-68983.herokuapp.com/api/submitOrder
