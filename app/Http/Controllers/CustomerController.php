@@ -361,7 +361,10 @@ class CustomerController extends Controller
             }
 
             $shipment = Shipment::where('no_awb', $request->shippingId)->first();
-            $shipmentStatus = ShipmentStatus::where('shipmentId', $shipment->id)->get();
+            $shipmentStatus = Db::table('shipment_status')
+		        			->select('shipment_status.*')
+		                    ->where('shipment_id', $shipment->id)
+		                    ->get();
             
             if($shipmentStatus){	            	
 	            $output->status = 200;

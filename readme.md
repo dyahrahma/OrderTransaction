@@ -222,7 +222,7 @@ Melakukan penambahan produk pada order
 + Response 404
         {
 		 	"status": 404,
-			"message": "order id not found"
+			"message": "Not Found."
 		}
     
 + Response 500
@@ -239,3 +239,88 @@ Melakukan pengecekan status pengiriman
 
 + Example Request
     `https://frozen-bastion-68983.herokuapp.com/api/checkShipmentStatus?shippingId=01067105501317`
+
++ Response 200    
+{
+  	"status": 200,
+  	"message": "Success",
+  	"data": {
+    "status": [
+      	{
+	        "id": 1,
+	        "status_time": "2017-03-23 20:33:00",
+	        "status": "SHIPMENT RECEIVED BY JNE COUNTER OFFICER AT [JAKARTA]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 2,
+	        "status_time": "2017-03-23 21:37:00",
+	        "status": "RECEIVED AT SORTING CENTER [JAKARTA]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 3,
+	        "status_time": "2017-03-23 22:04:00",
+	        "status": "PROCESSED AT SORTING CENTER [JAKARTA]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 4,
+	        "status_time": "2017-03-23 23:11:00",
+	        "status": "SHIPMENT PICKED UP BY JNE COURIER [JAKARTA]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 5,
+	        "status_time": "2017-03-24 06:15:00",
+	        "status": "DEPARTED FROM TRANSIT [GATEWAY, BANDUNG]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 6,
+	        "status_time": "2017-03-24 08:11:00",
+	        "status": "RECEIVED AT WAREHOUSE [BANDUNG]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 7,
+	        "status_time": "2017-03-24 14:17:00",
+	        "status": "WITH DELIVERY COURIER [BANDUNG]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	},
+      	{
+	        "id": 8,
+	        "status_time": "2017-03-24 19:15:00",
+	        "status": "DELIVERED TO [RAHMA | 12-03-2017 19:03 ]",
+	        "shipment_id": 1,
+	        "created_at": null,
+	        "updated_at": null
+      	}
+	]
+}
+
++ Response 404
+        {
+		 	"status": 404,
+			"message": "Not Found."
+		}
+    
++ Response 500
+        {
+            "status": 500,
+            "message": "Internal Service Error"
+        }
