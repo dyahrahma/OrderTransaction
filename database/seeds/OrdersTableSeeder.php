@@ -14,6 +14,7 @@ class OrdersTableSeeder extends Seeder
          if(DB::table('orders')->count() < 1) {
         	DB::table('orders')->insert([
 	            'id' =>1,
+                'user_id' => 2,
 	            'coupon_id' => 1,
                 'is_finalized' => true,
                 'name' => 'customer dyah rahma',
@@ -27,11 +28,15 @@ class OrdersTableSeeder extends Seeder
                 'is_valid' => true,
                 'is_shipped' => true,
                 'shipment_id' => 1,
-                'date_order' => '20170322'
+                'date_order' => '20170323',
+                'finalizing_time' => date("2017-03-23 11:00:00"),
+                'validating_time' => date("2017-03-23 13:00:00"),
+                'shipping_time' => date("2017-03-23 20:33:00")
 	        ]);
 			
 			DB::table('orders')->insert([
                 'id' =>2,
+                'user_id' => 2,
                 'coupon_id' => 2,
                 'is_finalized' => true,
                 'name' => 'test user',
@@ -45,7 +50,10 @@ class OrdersTableSeeder extends Seeder
                 'is_valid' => true,
                 'is_shipped' => true,
                 'shipment_id' => 2,
-                'date_order' => '20170324'
+                'date_order' => '20170325',
+                'finalizing_time' => date("2017-03-25 10:00:00"),
+                'validating_time' => date("2017-03-25 14:00:00"),
+                'shipping_time' => date("2017-03-25 18:15:00")
             ]);
 	    }
     }

@@ -21,17 +21,23 @@ Route::group(['middleware' => ['ability:Admin']], function()
     Route::get('/orderDetail', 'AdminController@orderDetail');
     Route::get('/cancelOrder', 'AdminController@cancelOrder');
     Route::post('/shipOrder', 'AdminController@shipOrder');
-    Route::get('/test2', 'TestController@test2')->name('test2');
 });
 
 Route::group(['middleware' => ['ability:Customer']], function()
 {
     // Protected route
-    Route::get('/test', 'TestController@test')->name('test2');
+    Route::get('/addProduct', 'CustomerController@addProduct');
+    Route::get('/applyCoupon', 'CustomerController@applyCoupon');
+    Route::post('/submitOrder', 'CustomerController@submitOrder');
+    // Route::post('/submitPaymentProof', 'CustomerController@submitPaymentProof');
+    Route::get('/checkOrderStatus', 'CustomerController@checkOrderStatus');
+    Route::get('/checkShipmentStatus', 'CustomerController@checkShipmentStatus');
 });
 
 // Authentication route
 Route::post('authenticate', 'AuthController@authenticate')->name('authenticate');
+Route::get('/test2', 'TestController@test2');
+Route::get('/test', 'TestController@test');
 
 // Route::get('/test', 'TestController@test')->name('test');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

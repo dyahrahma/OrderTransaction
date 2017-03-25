@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use DB;
 use Validator;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -98,7 +99,7 @@ class AdminController extends Controller
 	            $output->status = 200;
 	            $output->message = "Success";
 	            $output->data = (object)[];
-	            $output->data->orders = $result;
+	            $output->data->order = $result;
 
 	            return json_encode($output);
 	        }else{
@@ -133,6 +134,7 @@ class AdminController extends Controller
         	if($result){
         		$result->is_validated = true;
         		$result->is_valid = false;
+        		$result->validating_time = Carbon::now('Asia/Jakarta')->toDateTimeString();
 				$result->save();
 
 	            /* Writing Output */
@@ -158,12 +160,13 @@ class AdminController extends Controller
         try {            
         	/* Input Validation */
         	$messages = [
-	            'required' => ':attribute is required.'
+	            'required' => ':attribute is required.',
+	            'unique' => 'This :attribute has already existed'
 	        ];
 
             $validator = Validator::make($request->all(), [
                 'orderId' => 'numeric|required',
-                'noAwb' => 'string|required',                
+                'noAwb' => 'string|required|unique:shipments,no_awb',                
                 'shipmentTime' => 'string|required'
             ], $messages);
 
@@ -179,20 +182,19 @@ class AdminController extends Controller
                 return json_encode($output);
             }
 
-            //create shipment
-            $shipmentId = DB::table('shipments')->insertGetId([
-                'no_awb' => $request->noAwb,
-                'shipment_date' => date($request->shipmentTime)
-            ]);
-            if(!$shipmentId){
-            	$output->status = 500;
-	            $output->message = "Internal Service Error";
-	            return json_encode($output);
-            }
-
             //find order
         	$result = Order::find($request->orderId);
         	if($result){
+	            //create shipment
+	            $shipmentId = DB::table('shipments')->insertGetId([
+	                'no_awb' => $request->noAwb,
+	                'shipment_date' => date($request->shipmentTime)
+	            ]);
+	            if(!$shipmentId){
+	            	$output->status = 500;
+		            $output->message = "Internal Service Error";
+		            return json_encode($output);
+	            }
             	//create shipment stat
             	DB::table('shipment_status')->insert([
             		'status_time' => date($request->shipmentTime),
@@ -201,8 +203,12 @@ class AdminController extends Controller
 	            ]);
 
             	//update order
+            	$result->is_validated = true;
+        		$result->is_valid = true;
         		$result->is_shipped = true;
         		$result->shipment_id = $shipmentId;
+        		$result->validating_time = $request->shipmentTime;
+        		$result->shipping_time = $request->shipmentTime;
 				$result->save();
 
 	            /* Writing Output */

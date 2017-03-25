@@ -15,7 +15,7 @@ class CreateShipmentsTable extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('no_awb', 255);
+            $table->string('no_awb')->unique();
             $table->date('shipment_date');
             $table->timestamps();
         });
