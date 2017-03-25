@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['ability:Admin']], function()
 {
     // Protected route
+    Route::get('/orderList', 'AdminController@orderList')->name('orderList');
+    Route::get('/unvalidatedOrderList', 'AdminController@unvalidatedOrderList');
+    Route::get('/orderDetail', 'AdminController@orderDetail');
+    Route::get('/cancelOrder', 'AdminController@cancelOrder');
+    Route::post('/shipOrder', 'AdminController@shipOrder');
     Route::get('/test2', 'TestController@test2')->name('test2');
 });
 

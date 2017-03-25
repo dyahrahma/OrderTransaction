@@ -15,8 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('coupon_id')->unsigned();
-            $table->integer('shipping_id')->unsigned();
+            $table->integer('coupon_id')->unsigned()->nullable();
+            $table->integer('shipment_id')->unsigned()->nullable();
             $table->boolean('is_finalized');    //is_submitted
             $table->string('name');
             $table->string('phone');
@@ -31,8 +31,8 @@ class CreateOrdersTable extends Migration
             $table->dateTime('date_order');
             $table->timestamps();
 
-            $table->foreign('coupon_id')->references('id')->on('coupons')->nullable();
-            $table->foreign('shipping_id')->references('id')->on('shipments')->nullable();
+            $table->foreign('coupon_id')->references('id')->on('coupons');
+            $table->foreign('shipment_id')->references('id')->on('shipments');
         });
     }
 

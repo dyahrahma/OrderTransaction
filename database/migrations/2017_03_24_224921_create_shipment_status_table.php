@@ -17,10 +17,10 @@ class CreateShipmentStatusTable extends Migration
             $table->increments('id');
             $table->dateTime('status_time');
             $table->string('status', 255);            
-            $table->integer('shipping_id')->unsigned();
+            $table->integer('shipment_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('shipping_id')->references('id')->on('shipments');
+            $table->foreign('shipment_id')->references('id')->on('shipments');
         });
     }
 

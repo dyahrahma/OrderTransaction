@@ -26,7 +26,7 @@ class OrdersTableSeeder extends Seeder
                 'is_validated' => true,
                 'is_valid' => true,
                 'is_shipped' => true,
-                'shipping_id' => 1,
+                'shipment_id' => 1,
                 'date_order' => '20170322'
 	        ]);
 			
@@ -44,8 +44,8 @@ class OrdersTableSeeder extends Seeder
                 'is_validated' => true,
                 'is_valid' => true,
                 'is_shipped' => true,
-                'shipping_id' => 2,
-                'date_order' => '20170322'
+                'shipment_id' => 2,
+                'date_order' => '20170324'
             ]);
 	    }
     }
